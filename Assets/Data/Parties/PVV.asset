@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: [TO_BE_FILLED], type: 3}
+  m_Name: PVV
+  partyName: Partij voor de Vrijheid
+  abbreviation: PVV
+  leader: Geert Wilders
+  partyColor: {r: 0.0, g: 0.2, b: 0.8, a: 1.0}
+  partyLogo: {fileID: 0}
+  economicPosition: 3.0
+  socialPosition: -8.0
+  europeanPosition: -6.0
+  immigrationPosition: -9.0
+  currentPopularity: 23.5
+  campaignExpertise: 85.0
+  mediaPresence: 95.0
+  coalitionFlexibility: 30.0
+  preferredCoalitionPartners:
+  - VVD
+  - BBB
+  - NSC
+  excludedCoalitionPartners:
+  - GL-PvdA
+  - D66
+  - DENK
+  coreIssues: []
+  campaignBudget: 3500000.0
+  socialMediaFollowers: 850000
+  activeMembership: 45000

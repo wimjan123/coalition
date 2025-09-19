@@ -1,0 +1,25 @@
+{
+    "name": "Coalition.Tests.EditMode",
+    "rootNamespace": "Coalition.Tests.EditMode",
+    "references": [
+        "Coalition.Runtime",
+        "Coalition.Demo",
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

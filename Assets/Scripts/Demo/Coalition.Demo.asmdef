@@ -1,0 +1,19 @@
+{
+    "name": "Coalition.Demo",
+    "rootNamespace": "Coalition.Demo",
+    "references": [
+        "Coalition.Runtime",
+        "Unity.Addressables",
+        "Unity.UI",
+        "Unity.Newtonsoft.Json"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": ["COALITION_DEMO_BUILD"],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
