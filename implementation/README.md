@@ -5,6 +5,15 @@
 **Estimated Timeline**: 35-45 weeks for complete game
 **Target**: Production-ready Dutch political simulation
 
+## 🔗 **RESEARCH FOUNDATION LINKS**
+
+**Complete Navigation**: See [`../DOCUMENTATION_INDEX.md`](../DOCUMENTATION_INDEX.md) for master index
+**Research Context**: All implementation plans include research background sections with:
+- Direct links to supporting research sections (65,000+ words)
+- Historical validation requirements from Dutch political analysis
+- Cross-references to competitive analysis and unique positioning
+- Expert validation criteria and political accuracy requirements
+
 ---
 
 ## 📁 Implementation Structure

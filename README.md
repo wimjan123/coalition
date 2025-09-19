@@ -6,6 +6,19 @@
 
 Complete Unity 6 C# project structure with AI-assisted development architecture for Dutch political simulation featuring authentic coalition formation mechanics and NVIDIA NIM local LLM integration.
 
+## 📚 Documentation Navigation
+
+**🗂️ Master Index**: [`DOCUMENTATION_INDEX.md`](./DOCUMENTATION_INDEX.md) - Complete navigation with reading paths
+**📖 For Developers**: Quick start path (2-3 hours) → Complete implementation path (6-8 hours)
+**🏛️ For Researchers**: Research foundation (4-5 hours) → Political validation procedures
+**🤖 For AI Specialists**: AI integration path (3-4 hours) → Performance optimization
+**📊 For Project Managers**: Project overview (1-2 hours) → Timeline and milestones
+
+**Key Cross-References**:
+- Research documents → Implementation plans with specific section mapping
+- Implementation steps → Supporting research context and validation criteria
+- All documents include consistent terminology and bidirectional navigation
+
 ## Key Features Implemented
 
 ### 🏗️ Unity 6 Project Architecture

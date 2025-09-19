@@ -12,6 +12,18 @@
 
 This document provides 45 detailed micro-steps for implementing the core Dutch political simulation systems including the 150-seat parliament, 12 major political parties, coalition formation logic, and political issue systems.
 
+### 📚 **RESEARCH FOUNDATION**
+**Complete Context**: See [`RESEARCH_BACKGROUND.md`](./RESEARCH_BACKGROUND.md) for full research-to-implementation mapping
+**Source Documents**:
+- [`docs/DUTCH_POLITICS.md`](../../docs/DUTCH_POLITICS.md) (12,853 words) - Complete Dutch political system analysis
+- [`docs/COMPETITIVE_ANALYSIS.md`](../../docs/COMPETITIVE_ANALYSIS.md) - Market positioning and unique approach
+- [`docs/ETHICS.md`](../../docs/ETHICS.md) - Democratic values and validation requirements
+
+**Key Research Insights Informing This Implementation**:
+- **Historical Validation**: Algorithm must match exact 2023 election results (VVD 34 seats, PVV 37 seats, etc.)
+- **Cultural Authenticity**: All mechanics based on real Dutch political procedures and terminology
+- **Expert Requirements**: Political science academic review required for >90% accuracy validation
+
 ### Implementation Goals
 - Authentic Dutch D'Hondt electoral system with mathematical precision
 - Complete political party database with real 2023 data
@@ -52,8 +64,10 @@ public class DHondtElectoralSystem : MonoBehaviour
 }
 ```
 
-**Validation**: Algorithm produces correct seat allocation for 2023 Dutch election data
+**Research Context**: Implementation of [`docs/DUTCH_POLITICS.md`](../../docs/DUTCH_POLITICS.md) Section 2.3: Electoral Mechanics
+**Validation**: Algorithm produces correct seat allocation for 2023 Dutch election data (VVD: 34, PVV: 37, NSC: 20, GL-PvdA: 25, D66: 24, BBB: 7, CDA: 5, SP: 5, FvD: 3, PvdD: 3, CU: 3, Volt: 3, JA21: 1, SGP: 3, DENK: 3)
 **Files**: `DHondtElectoralSystem.cs`, `DHondtTests.cs`
+**Cross-Reference**: See [`RESEARCH_BACKGROUND.md`](./RESEARCH_BACKGROUND.md) - D'Hondt Electoral System section
 
 ## Step 1.2: Electoral Threshold Implementation (20 min, Medium)
 
