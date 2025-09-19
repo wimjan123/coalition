@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Linq;
 using COALITION.Core;
 using COALITION.Extensions;
 
@@ -208,6 +209,11 @@ namespace COALITION.Integration
             Debug.Log("📊 COALITION Demo Status Report:");
             Debug.Log("=====================================");
 
+            // Unity Version Check
+            Debug.Log($"Unity Version: {Application.unityVersion}");
+            bool correctUnityVersion = Application.unityVersion.StartsWith("6000.0.58f1");
+            Debug.Log($"  Unity 6000.0.58f1: {(correctUnityVersion ? "✅ Compatible" : "⚠️ Version Mismatch")}");
+
             // Check all major systems
             bool gameManagerOK = FindObjectOfType<GameManager>() != null;
             bool politicalSystemOK = FindObjectOfType<PoliticalSystem>() != null;
@@ -220,7 +226,7 @@ namespace COALITION.Integration
             Debug.Log($"  UIDocument: {(uiDocumentOK ? "✅ Ready" : "❌ Missing")}");
             Debug.Log($"  UIEventBinder: {(uiEventBinderOK ? "✅ Ready" : "❌ Missing")}");
 
-            bool allSystemsReady = gameManagerOK && politicalSystemOK && uiDocumentOK && uiEventBinderOK;
+            bool allSystemsReady = gameManagerOK && politicalSystemOK && uiDocumentOK && uiEventBinderOK && correctUnityVersion;
 
             Debug.Log("=====================================");
             if (allSystemsReady)
@@ -231,9 +237,48 @@ namespace COALITION.Integration
             else
             {
                 Debug.Log("⚠️ DEMO STATUS: CONFIGURATION NEEDED");
-                Debug.Log("Some systems require setup in Unity Inspector");
+                if (!correctUnityVersion)
+                    Debug.Log("Unity version should be 6000.0.58f1");
+                if (!gameManagerOK || !politicalSystemOK || !uiDocumentOK || !uiEventBinderOK)
+                    Debug.Log("Some systems require setup in Unity Inspector");
             }
             Debug.Log("=====================================");
+        }
+
+        [ContextMenu("Validate Unity 6 Compatibility")]
+        public void ValidateUnity6Compatibility()
+        {
+            Debug.Log("🔧 Unity 6000.0.58f1 Compatibility Check:");
+            Debug.Log("==========================================");
+
+            // Version verification
+            string currentVersion = Application.unityVersion;
+            bool isUnity6 = currentVersion.StartsWith("6000.0.58f1");
+            Debug.Log($"Unity Version: {currentVersion}");
+            Debug.Log($"  Target Version: 6000.0.58f1");
+            Debug.Log($"  Version Match: {(isUnity6 ? "✅ Compatible" : "❌ Version Mismatch")}");
+
+            // UI Toolkit compatibility
+            var uiDocument = FindObjectOfType<UnityEngine.UIElements.UIDocument>();
+            if (uiDocument != null && uiDocument.rootVisualElement != null)
+            {
+                Debug.Log("  UI Toolkit: ✅ Functional");
+
+                // Test modern UI Toolkit features
+                var testElement = uiDocument.rootVisualElement.Q("StartButton");
+                Debug.Log($"  Element Query: {(testElement != null ? "✅ Working" : "⚠️ Limited")}");
+            }
+            else
+            {
+                Debug.Log("  UI Toolkit: ❌ Not Available");
+            }
+
+            // Assembly references check
+            bool hasUIElements = System.AppDomain.CurrentDomain.GetAssemblies()
+                .Any(a => a.GetName().Name == "UnityEngine.UIElementsModule");
+            Debug.Log($"  UIElements Assembly: {(hasUIElements ? "✅ Loaded" : "❌ Missing")}");
+
+            Debug.Log("==========================================");
         }
     }
 }

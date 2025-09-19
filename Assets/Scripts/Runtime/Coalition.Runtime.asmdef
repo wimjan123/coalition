@@ -4,6 +4,8 @@
     "references": [
         "Unity.Addressables",
         "Unity.ResourceManager",
+        "Unity.UI",
+        "Unity.UIElements",
         "Unity.Newtonsoft.Json"
     ],
     "includePlatforms": [],

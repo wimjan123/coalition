@@ -5,6 +5,7 @@
         "Coalition.Runtime",
         "Unity.Addressables",
         "Unity.UI",
+        "Unity.UIElements",
         "Unity.Newtonsoft.Json"
     ],
     "includePlatforms": [],
