@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "com.unity.test-framework": "1.4.5",
+    "com.unity.test-framework.performance": "3.0.3",
+    "com.unity.nuget.moq": "3.0.4",
+    "com.unity.addressable-assets": "1.22.2",
+    "com.unity.ui": "1.0.0-preview.18",
+    "com.unity.newtonsoft-json": "3.2.1",
+    "com.unity.modules.ui": "1.0.0",
+    "com.unity.modules.imgui": "1.0.0",
+    "com.unity.modules.jsonserialize": "1.0.0",
+    "com.unity.modules.physics": "1.0.0",
+    "com.unity.modules.audio": "1.0.0",
+    "com.unity.modules.animation": "1.0.0"
+  },
+  "scopedRegistries": [
+    {
+      "name": "Unity NuGet",
+      "url": "https://unitynuget-registry.azurewebsites.net",
+      "scopes": [
+        "com.unity.nuget"
+      ]
+    }
+  ]
+}

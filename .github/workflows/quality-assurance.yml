@@ -1,0 +1,579 @@
+# COALITION Quality Assurance CI/CD Pipeline
+# Comprehensive testing workflow for political simulation validation
+
+name: Quality Assurance Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    # Daily comprehensive testing at 2 AM UTC
+    - cron: '0 2 * * *'
+
+env:
+  UNITY_VERSION: 2023.3.0f1
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+  PROJECT_PATH: .
+
+jobs:
+  # ================================
+  # STAGE 1: Static Analysis
+  # ================================
+  static-analysis:
+    name: 🔍 Static Code Analysis
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '6.0.x'
+
+    - name: Install CodeQL tools
+      run: |
+        dotnet tool install --global security-scan
+        dotnet tool install --global dotnet-format
+
+    - name: Code formatting validation
+      run: |
+        dotnet format --verify-no-changes --include Assets/Scripts/
+
+    - name: Security vulnerability scan
+      run: |
+        security-scan Assets/Scripts/ --output security-report.json
+
+    - name: Political content sensitivity check
+      run: |
+        # Custom script to check for biased political content
+        python scripts/political-sensitivity-check.py Assets/Scripts/
+
+    - name: Upload static analysis results
+      uses: actions/upload-artifact@v3
+      with:
+        name: static-analysis-results
+        path: |
+          security-report.json
+          political-sensitivity-report.json
+
+  # ================================
+  # STAGE 2: Unit Testing
+  # ================================
+  unit-tests:
+    name: 🧪 Unit Tests
+    runs-on: ubuntu-latest
+    needs: static-analysis
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Cache Unity installation
+      uses: actions/cache@v3
+      with:
+        path: /opt/unity
+        key: unity-${{ env.UNITY_VERSION }}
+
+    - name: Setup Unity
+      uses: game-ci/unity-builder@v2
+      with:
+        unityVersion: ${{ env.UNITY_VERSION }}
+        targetPlatform: StandaloneLinux64
+
+    - name: Run EditMode tests
+      uses: game-ci/unity-test-runner@v2
+      with:
+        unityVersion: ${{ env.UNITY_VERSION }}
+        testMode: EditMode
+        artifactsPath: test-results/unit
+        githubToken: ${{ secrets.GITHUB_TOKEN }}
+        checkName: 'Unit Test Results'
+
+    - name: Validate EventBus performance
+      run: |
+        # Extract EventBus performance metrics from test results
+        python scripts/validate-eventbus-performance.py test-results/unit/
+
+    - name: Political accuracy validation
+      run: |
+        # Validate Dutch political system accuracy
+        python scripts/validate-political-accuracy.py test-results/unit/
+
+    - name: Generate coverage report
+      run: |
+        # Generate code coverage for unit tests
+        dotnet test --collect:"XPlat Code Coverage" --results-directory test-results/coverage/
+
+    - name: Upload unit test results
+      uses: actions/upload-artifact@v3
+      with:
+        name: unit-test-results
+        path: test-results/unit/
+
+    - name: Upload coverage report
+      uses: codecov/codecov-action@v3
+      with:
+        directory: test-results/coverage/
+        flags: unittests
+
+  # ================================
+  # STAGE 3: Integration Testing
+  # ================================
+  integration-tests:
+    name: 🔗 Integration Tests
+    runs-on: ubuntu-latest
+    needs: unit-tests
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Unity
+      uses: game-ci/unity-builder@v2
+      with:
+        unityVersion: ${{ env.UNITY_VERSION }}
+        targetPlatform: StandaloneLinux64
+
+    - name: Run PlayMode tests
+      uses: game-ci/unity-test-runner@v2
+      with:
+        unityVersion: ${{ env.UNITY_VERSION }}
+        testMode: PlayMode
+        artifactsPath: test-results/integration
+        githubToken: ${{ secrets.GITHUB_TOKEN }}
+        checkName: 'Integration Test Results'
+
+    - name: Dutch coalition formation validation
+      run: |
+        # Validate Dutch coalition formation accuracy against historical data
+        python scripts/validate-coalition-formation.py test-results/integration/
+
+    - name: AI integration validation
+      run: |
+        # Validate AI response quality and bias detection
+        python scripts/validate-ai-integration.py test-results/integration/
+
+    - name: Campaign mechanics validation
+      run: |
+        # Validate campaign system integration
+        python scripts/validate-campaign-mechanics.py test-results/integration/
+
+    - name: Upload integration test results
+      uses: actions/upload-artifact@v3
+      with:
+        name: integration-test-results
+        path: test-results/integration/
+
+  # ================================
+  # STAGE 4: Performance Testing
+  # ================================
+  performance-tests:
+    name: ⚡ Performance Tests
+    runs-on: ubuntu-latest
+    needs: integration-tests
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Unity with Performance Testing
+      uses: game-ci/unity-builder@v2
+      with:
+        unityVersion: ${{ env.UNITY_VERSION }}
+        targetPlatform: StandaloneLinux64
+
+    - name: Run performance test suite
+      run: |
+        # Execute Unity Performance Testing framework
+        /opt/unity/Editor/Unity \
+          -batchmode \
+          -quit \
+          -projectPath ${{ env.PROJECT_PATH }} \
+          -runTests \
+          -testCategory "Performance" \
+          -testResults test-results/performance/results.xml \
+          -perfTestResults test-results/performance/perf-results.json
+
+    - name: Multi-party simulation performance
+      run: |
+        # Validate performance with 15+ party scenario
+        python scripts/validate-multiparty-performance.py test-results/performance/
+
+    - name: Extended session stability
+      run: |
+        # Validate 4+ hour session stability
+        python scripts/validate-session-stability.py test-results/performance/
+
+    - name: AI response time validation
+      run: |
+        # Validate AI response times meet requirements
+        python scripts/validate-ai-performance.py test-results/performance/
+
+    - name: Memory leak detection
+      run: |
+        # Check for memory leaks in long-running sessions
+        python scripts/detect-memory-leaks.py test-results/performance/
+
+    - name: Performance regression analysis
+      run: |
+        # Compare against baseline performance metrics
+        python scripts/performance-regression-analysis.py \
+          test-results/performance/ \
+          baseline-performance.json
+
+    - name: Upload performance results
+      uses: actions/upload-artifact@v3
+      with:
+        name: performance-test-results
+        path: test-results/performance/
+
+  # ================================
+  # STAGE 5: Political Accuracy Validation
+  # ================================
+  political-validation:
+    name: 🏛️ Political Accuracy Validation
+    runs-on: ubuntu-latest
+    needs: performance-tests
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup political validation environment
+      run: |
+        pip install pandas numpy scipy
+        pip install political-analysis-toolkit
+
+    - name: Historical coalition accuracy
+      run: |
+        # Validate against known Dutch coalition formations (2017-2021)
+        python scripts/historical-coalition-validation.py \
+          --test-results test-results/ \
+          --historical-data data/historical-coalitions.json \
+          --accuracy-threshold 0.95
+
+    - name: D'Hondt method validation
+      run: |
+        # Validate electoral system implementation
+        python scripts/validate-dhondt-method.py \
+          --election-data data/dutch-elections.json \
+          --expected-accuracy 0.98
+
+    - name: Ideological compatibility validation
+      run: |
+        # Validate party ideological distance calculations
+        python scripts/validate-ideological-compatibility.py \
+          --party-data data/dutch-parties.json \
+          --expert-ratings data/expert-party-ratings.json
+
+    - name: Coalition formation timeline validation
+      run: |
+        # Validate realistic coalition formation timelines
+        python scripts/validate-formation-timelines.py \
+          --historical-data data/coalition-formation-history.json \
+          --simulation-results test-results/
+
+    - name: Generate political accuracy report
+      run: |
+        python scripts/generate-political-accuracy-report.py \
+          --output political-accuracy-report.html
+
+    - name: Upload political validation results
+      uses: actions/upload-artifact@v3
+      with:
+        name: political-validation-results
+        path: |
+          political-accuracy-report.html
+          political-validation-results.json
+
+  # ================================
+  # STAGE 6: AI Quality Assurance
+  # ================================
+  ai-quality-assurance:
+    name: 🤖 AI Quality Assurance
+    runs-on: ubuntu-latest
+    needs: political-validation
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup AI validation environment
+      run: |
+        pip install transformers torch
+        pip install bias-detection-toolkit
+        pip install political-sentiment-analyzer
+
+    - name: AI response bias detection
+      run: |
+        # Analyze AI responses for political bias
+        python scripts/ai-bias-detection.py \
+          --test-responses test-results/integration/ai-responses.json \
+          --bias-threshold 0.3 \
+          --output ai-bias-report.json
+
+    - name: Response quality validation
+      run: |
+        # Validate AI response quality metrics
+        python scripts/ai-quality-validation.py \
+          --responses test-results/integration/ai-responses.json \
+          --quality-threshold 0.7 \
+          --output ai-quality-report.json
+
+    - name: Political neutrality assessment
+      run: |
+        # Assess political neutrality of AI responses
+        python scripts/political-neutrality-assessment.py \
+          --responses test-results/integration/ai-responses.json \
+          --neutrality-threshold 0.8 \
+          --output neutrality-report.json
+
+    - name: Response time performance
+      run: |
+        # Validate AI response time requirements
+        python scripts/ai-performance-validation.py \
+          --performance-data test-results/performance/ai-performance.json \
+          --max-response-time 5000 # 5 seconds
+
+    - name: Generate AI quality report
+      run: |
+        python scripts/generate-ai-quality-report.py \
+          --bias-report ai-bias-report.json \
+          --quality-report ai-quality-report.json \
+          --neutrality-report neutrality-report.json \
+          --output ai-quality-dashboard.html
+
+    - name: Upload AI quality results
+      uses: actions/upload-artifact@v3
+      with:
+        name: ai-quality-results
+        path: |
+          ai-quality-dashboard.html
+          ai-bias-report.json
+          ai-quality-report.json
+          neutrality-report.json
+
+  # ================================
+  # STAGE 7: Security Assessment
+  # ================================
+  security-assessment:
+    name: 🔒 Security Assessment
+    runs-on: ubuntu-latest
+    needs: ai-quality-assurance
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Dependency vulnerability scan
+      uses: snyk/actions/dotnet@master
+      with:
+        args: --all-projects --severity-threshold=medium
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+    - name: AI endpoint security validation
+      run: |
+        # Validate AI integration security measures
+        python scripts/ai-security-validation.py \
+          --endpoint-config Assets/Scripts/AI/NIMClient.cs \
+          --security-requirements security-requirements.json
+
+    - name: Data privacy compliance check
+      run: |
+        # Ensure no personal data in political simulation
+        python scripts/privacy-compliance-check.py \
+          --source-code Assets/Scripts/ \
+          --test-data Assets/Tests/
+
+    - name: Political content sensitivity scan
+      run: |
+        # Scan for potentially sensitive political content
+        python scripts/political-content-scan.py \
+          --content-sources Assets/Scripts/ \
+          --sensitivity-config political-sensitivity-config.json
+
+    - name: Upload security assessment results
+      uses: actions/upload-artifact@v3
+      with:
+        name: security-assessment-results
+        path: |
+          security-assessment-report.json
+          privacy-compliance-report.json
+          political-sensitivity-report.json
+
+  # ================================
+  # STAGE 8: Quality Gate Evaluation
+  # ================================
+  quality-gate:
+    name: 🚪 Quality Gate Evaluation
+    runs-on: ubuntu-latest
+    needs: [unit-tests, integration-tests, performance-tests, political-validation, ai-quality-assurance, security-assessment]
+
+    steps:
+    - name: Download all test artifacts
+      uses: actions/download-artifact@v3
+
+    - name: Evaluate quality gates
+      run: |
+        python scripts/quality-gate-evaluation.py \
+          --unit-tests unit-test-results/ \
+          --integration-tests integration-test-results/ \
+          --performance-tests performance-test-results/ \
+          --political-validation political-validation-results/ \
+          --ai-quality ai-quality-results/ \
+          --security-assessment security-assessment-results/ \
+          --quality-config quality-gates-config.json \
+          --output quality-gate-report.json
+
+    - name: Generate comprehensive quality report
+      run: |
+        python scripts/generate-quality-dashboard.py \
+          --all-results . \
+          --output quality-dashboard.html \
+          --metrics-output quality-metrics.json
+
+    - name: Quality gate decision
+      run: |
+        # Determine if quality gates pass
+        python scripts/quality-gate-decision.py \
+          --quality-report quality-gate-report.json \
+          --fail-on-gate-failure true
+
+    - name: Upload quality gate results
+      uses: actions/upload-artifact@v3
+      with:
+        name: quality-gate-results
+        path: |
+          quality-dashboard.html
+          quality-gate-report.json
+          quality-metrics.json
+
+  # ================================
+  # STAGE 9: Build and Package
+  # ================================
+  build-and-package:
+    name: 📦 Build and Package
+    runs-on: ubuntu-latest
+    needs: quality-gate
+    if: success()
+
+    strategy:
+      matrix:
+        platform: [StandaloneWindows64, StandaloneLinux64, StandaloneOSX]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Build Unity project
+      uses: game-ci/unity-builder@v2
+      with:
+        unityVersion: ${{ env.UNITY_VERSION }}
+        targetPlatform: ${{ matrix.platform }}
+        buildName: COALITION-${{ matrix.platform }}
+        buildsPath: builds/
+
+    - name: Package build
+      run: |
+        cd builds/
+        tar -czf COALITION-${{ matrix.platform }}-${{ github.sha }}.tar.gz ${{ matrix.platform }}/
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: build-${{ matrix.platform }}
+        path: builds/COALITION-${{ matrix.platform }}-${{ github.sha }}.tar.gz
+
+  # ================================
+  # STAGE 10: Deployment Readiness
+  # ================================
+  deployment-readiness:
+    name: 🚀 Deployment Readiness Assessment
+    runs-on: ubuntu-latest
+    needs: build-and-package
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+    - name: Download quality gate results
+      uses: actions/download-artifact@v3
+      with:
+        name: quality-gate-results
+
+    - name: Production readiness checklist
+      run: |
+        python scripts/production-readiness-checklist.py \
+          --quality-metrics quality-metrics.json \
+          --checklist-config production-readiness-config.json \
+          --output production-readiness-report.json
+
+    - name: Performance benchmark validation
+      run: |
+        # Validate performance meets production requirements
+        python scripts/production-performance-validation.py \
+          --performance-data performance-test-results/ \
+          --production-requirements production-performance-requirements.json
+
+    - name: Security clearance validation
+      run: |
+        # Final security validation for production deployment
+        python scripts/production-security-validation.py \
+          --security-data security-assessment-results/ \
+          --clearance-requirements production-security-requirements.json
+
+    - name: Generate deployment documentation
+      run: |
+        python scripts/generate-deployment-documentation.py \
+          --quality-data . \
+          --version ${{ github.sha }} \
+          --output deployment-documentation.html
+
+    - name: Upload deployment readiness results
+      uses: actions/upload-artifact@v3
+      with:
+        name: deployment-readiness
+        path: |
+          production-readiness-report.json
+          deployment-documentation.html
+
+# ================================
+# Quality Gate Configuration
+# ================================
+env:
+  QUALITY_GATES: |
+    {
+      "unit_test_pass_rate": 100,
+      "integration_test_pass_rate": 100,
+      "code_coverage_minimum": 80,
+      "performance_regression_threshold": 5,
+      "political_accuracy_minimum": 95,
+      "ai_bias_maximum": 30,
+      "ai_quality_minimum": 70,
+      "security_vulnerabilities_maximum": 0,
+      "memory_leak_tolerance": 0
+    }
+
+# ================================
+# Notification Configuration
+# ================================
+notifications:
+  on_failure:
+    - name: Slack notification
+      uses: 8398a7/action-slack@v3
+      with:
+        status: failure
+        webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+
+  on_success:
+    - name: Quality metrics update
+      run: |
+        # Update quality metrics dashboard
+        python scripts/update-quality-metrics.py \
+          --metrics quality-metrics.json \
+          --dashboard-url ${{ secrets.QUALITY_DASHBOARD_URL }}
