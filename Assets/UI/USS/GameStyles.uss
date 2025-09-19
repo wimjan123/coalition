@@ -181,7 +181,10 @@
     flex-grow: 1;
     border-width: 2px;
     border-color: rgb(100, 100, 100);
-    border-style: dashed;
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
     padding: 15px;
     margin-bottom: 20px;
     border-radius: 5px;
@@ -190,9 +193,9 @@
 
 .coalition-placeholder {
     color: var(--text-disabled);
-    text-align: middle-center;
+    -unity-text-align: middle-center;
     margin-top: 50px;
-    font-style: italic;
+    -unity-font-style: italic;
 }
 
 .coalition-info {

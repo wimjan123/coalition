@@ -195,11 +195,9 @@ namespace Coalition.Runtime.Core
                     }
                 }
 
-                foreach (var typeToC
-lear in typesToClear)
+                foreach (var typeToClear in typesToClear)
                 {
-                    cachedEvents.Remove(typeToC
-lear);
+                    cachedEvents.Remove(typeToClear);
                 }
 
                 if (enableDebugLogging)
