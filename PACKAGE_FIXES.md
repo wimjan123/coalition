@@ -16,6 +16,11 @@ com.unity.newtonsoft-json: Package [com.unity.newtonsoft-json@3.2.1] cannot be f
 com.unity.nuget.moq: Cannot connect to 'unitynuget-registry.azurewebsites.net'
 ```
 
+### 2. **Incorrect Package Names** ❌ (Updated 2025-09-19)
+```
+com.unity.newtonsoft-json: Package [com.unity.newtonsoft-json@3.2.1] cannot be found
+```
+
 ### 2. **Registry Connection Issues** ❌
 - Unity NuGet registry was unreachable
 - Obsolete package names causing resolution failures
@@ -32,6 +37,9 @@ com.unity.nuget.moq: Cannot connect to 'unitynuget-registry.azurewebsites.net'
 - `com.unity.nuget.moq@3.0.4` → Removed (unreliable registry)
 - `com.unity.ui@1.0.0-preview.18` → Removed (obsolete preview)
 
+#### **Corrected Package Names:** (Updated 2025-09-19)
+- `com.unity.newtonsoft-json@3.2.1` → Corrected to `com.unity.nuget.newtonsoft-json@3.2.1`
+
 #### **Updated Dependencies:**
 ```json
 {
@@ -39,7 +47,7 @@ com.unity.nuget.moq: Cannot connect to 'unitynuget-registry.azurewebsites.net'
     "com.unity.test-framework": "1.4.5",
     "com.unity.test-framework.performance": "3.0.3",
     "com.unity.addressables": "2.1.0",
-    "com.unity.newtonsoft-json": "3.2.1",
+    "com.unity.nuget.newtonsoft-json": "3.2.1",
     "com.unity.modules.ui": "1.0.0",
     "com.unity.modules.imgui": "1.0.0",
     "com.unity.modules.jsonserialize": "1.0.0",
@@ -61,7 +69,7 @@ com.unity.nuget.moq: Cannot connect to 'unitynuget-registry.azurewebsites.net'
 | Package | Old Version | New Version | Status |
 |---------|-------------|-------------|---------|
 | **Addressables** | com.unity.addressable-assets@1.22.2 | com.unity.addressables@2.1.0 | ✅ Compatible |
-| **Newtonsoft JSON** | 3.2.1 | 3.2.1 | ✅ Maintained |
+| **Newtonsoft JSON** | com.unity.newtonsoft-json@3.2.1 | com.unity.nuget.newtonsoft-json@3.2.1 | ✅ Fixed Package Name |
 | **Test Framework** | 1.4.5 | 1.4.5 | ✅ Maintained |
 | **Test Framework Performance** | 3.0.3 | 3.0.3 | ✅ Maintained |
 | **UI Modules** | Core modules | Core modules | ✅ Maintained |
@@ -82,6 +90,7 @@ com.unity.nuget.moq: Cannot connect to 'unitynuget-registry.azurewebsites.net'
 
 ### **Assembly Definition Compatibility** ✅
 - `Unity.Addressables` reference maintained in all .asmdef files
+- `Unity.Nuget.Newtonsoft-Json` reference updated from `Unity.Newtonsoft.Json`
 - No breaking changes to existing code
 - Full compatibility with existing political simulation systems
 

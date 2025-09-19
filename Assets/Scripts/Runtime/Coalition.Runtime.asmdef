@@ -6,7 +6,7 @@
         "Unity.ResourceManager",
         "Unity.UI",
         "Unity.UIElements",
-        "Unity.Newtonsoft.Json"
+        "Unity.Nuget.Newtonsoft-Json"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

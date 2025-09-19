@@ -5,7 +5,7 @@
         "Unity.Addressables",
         "Unity.UI",
         "Unity.UIElements",
-        "Unity.Newtonsoft.Json"
+        "Unity.Nuget.Newtonsoft-Json"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
