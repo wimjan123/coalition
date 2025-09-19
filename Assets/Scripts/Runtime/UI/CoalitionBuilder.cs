@@ -48,7 +48,7 @@ namespace Coalition.Runtime.UI
         private List<PartyCard> availablePartyCards;
         private List<PartyCard> coalitionPartyCards;
         private ElectionResult currentElectionResult;
-        private Coalition currentCoalition;
+        private PoliticalCoalition currentCoalition;
 
         // Coalition analysis
         private float lastUpdateTime;
@@ -61,7 +61,7 @@ namespace Coalition.Runtime.UI
 
         #region Properties
 
-        public Coalition CurrentCoalition => currentCoalition;
+        public PoliticalCoalition CurrentCoalition => currentCoalition;
         public int TotalCoalitionSeats { get; private set; }
         public bool HasMajority => TotalCoalitionSeats >= 76;
         public float CompatibilityScore { get; private set; }
@@ -712,7 +712,7 @@ namespace Coalition.Runtime.UI
     /// </summary>
     public class CoalitionChangedEvent
     {
-        public Coalition Coalition { get; set; }
+        public PoliticalCoalition Coalition { get; set; }
         public int TotalSeats { get; set; }
         public bool HasMajority { get; set; }
         public System.DateTime Timestamp { get; } = System.DateTime.Now;
@@ -734,7 +734,7 @@ namespace Coalition.Runtime.UI
     /// </summary>
     public class GovernmentFormedEvent
     {
-        public Coalition Coalition { get; set; }
+        public PoliticalCoalition Coalition { get; set; }
         public System.DateTime FormationDate { get; set; }
         public System.DateTime Timestamp { get; } = System.DateTime.Now;
     }

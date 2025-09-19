@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using Coalition.Runtime.Core;
 using Coalition.Runtime.Data;
 
@@ -33,7 +34,7 @@ namespace Coalition.Runtime.UI
 
         // Parliament data
         private ElectionResult currentElectionResult;
-        private Coalition currentCoalition;
+        private PoliticalCoalition currentCoalition;
         private bool showSeatNumbers = false;
 
         // Legend management
@@ -448,7 +449,7 @@ namespace Coalition.Runtime.UI
         /// Set the coalition to highlight.
         /// </summary>
         /// <param name="coalition">Coalition data</param>
-        public void SetCoalition(Coalition coalition)
+        public void SetCoalition(PoliticalCoalition coalition)
         {
             currentCoalition = coalition;
 

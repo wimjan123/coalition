@@ -4,7 +4,7 @@
     "references": [
         "Unity.Addressables",
         "Unity.ResourceManager",
-        "Unity.UI",
+        "UnityEngine.UI",
         "Unity.UIElements",
         "Unity.Nuget.Newtonsoft-Json"
     ],

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Coalition.Runtime.Data;
+using Coalition.Political.Elections;
 
 namespace Coalition.Runtime.Core
 {
@@ -276,11 +277,11 @@ namespace Coalition.Runtime.Core
     /// </summary>
     public class CoalitionAnalysisCompletedEvent : PoliticalEvent
     {
-        public CoalitionFormationSystem.CoalitionAnalysis Analysis { get; }
+        public DHondtElectionSystem.CoalitionAnalysis Analysis { get; }
         public float AnalysisTimeMs { get; }
         public bool HasViableCoalitions { get; }
         
-        public CoalitionAnalysisCompletedEvent(CoalitionFormationSystem.CoalitionAnalysis analysisResult)
+        public CoalitionAnalysisCompletedEvent(DHondtElectionSystem.CoalitionAnalysis analysisResult)
         {
             Analysis = analysisResult;
             AnalysisTimeMs = analysisResult?.AnalysisTimeMs ?? 0f;

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using Coalition.Runtime.Core;
 using Coalition.Runtime.Data;
 
@@ -41,7 +42,7 @@ namespace Coalition.Runtime.UI
 
         // Window state
         private bool isFirstOpen = true;
-        private Coalition currentCoalition;
+        private PoliticalCoalition currentCoalition;
         private ElectionResult currentElectionResult;
         private System.Collections.Generic.List<GameObject> warningItems;
 
@@ -629,7 +630,7 @@ namespace Coalition.Runtime.UI
         /// Get the current coalition from the builder.
         /// </summary>
         /// <returns>Current coalition</returns>
-        public Coalition GetCurrentCoalition()
+        public PoliticalCoalition GetCurrentCoalition()
         {
             return coalitionBuilder?.CurrentCoalition;
         }

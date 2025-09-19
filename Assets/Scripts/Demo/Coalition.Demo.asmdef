@@ -4,7 +4,7 @@
     "references": [
         "Coalition.Runtime",
         "Unity.Addressables",
-        "Unity.UI",
+        "UnityEngine.UI",
         "Unity.UIElements",
         "Unity.Nuget.Newtonsoft-Json"
     ],

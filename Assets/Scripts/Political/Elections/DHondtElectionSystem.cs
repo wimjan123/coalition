@@ -303,7 +303,7 @@ public static class CoalitionFormationSystem
     /// Represents a potential coalition with compatibility metrics
     /// </summary>
     [System.Serializable]
-    public class Coalition
+    public class PoliticalCoalition
     {
         public List<string> PartyNames { get; set; } = new List<string>();
         public List<PoliticalParty> Parties { get; set; } = new List<PoliticalParty>();
@@ -317,7 +317,7 @@ public static class CoalitionFormationSystem
         public CoalitionType Type { get; set; }
         public float StabilityFactor { get; set; }
         
-        public Coalition()
+        public PoliticalCoalition()
         {
             PartyNames = new List<string>();
             Parties = new List<PoliticalParty>();
@@ -336,21 +336,21 @@ public static class CoalitionFormationSystem
     [System.Serializable]
     public class CoalitionAnalysis
     {
-        public List<Coalition> ViableCoalitions { get; set; } = new List<Coalition>();
-        public List<Coalition> MinorityOptions { get; set; } = new List<Coalition>();
-        public List<Coalition> BlockedCoalitions { get; set; } = new List<Coalition>();
-        public Coalition MostCompatible { get; set; }
-        public Coalition MostStable { get; set; }
-        public Coalition HistoricallyLikely { get; set; }
+        public List<PoliticalCoalition> ViableCoalitions { get; set; } = new List<PoliticalCoalition>();
+        public List<PoliticalCoalition> MinorityOptions { get; set; } = new List<PoliticalCoalition>();
+        public List<PoliticalCoalition> BlockedCoalitions { get; set; } = new List<PoliticalCoalition>();
+        public PoliticalCoalition MostCompatible { get; set; }
+        public PoliticalCoalition MostStable { get; set; }
+        public PoliticalCoalition HistoricallyLikely { get; set; }
         public float AnalysisTimeMs { get; set; }
         public int TotalCombinationsAnalyzed { get; set; }
         public DateTime AnalysisTimestamp { get; set; }
         
         public CoalitionAnalysis()
         {
-            ViableCoalitions = new List<Coalition>();
-            MinorityOptions = new List<Coalition>();
-            BlockedCoalitions = new List<Coalition>();
+            ViableCoalitions = new List<PoliticalCoalition>();
+            MinorityOptions = new List<PoliticalCoalition>();
+            BlockedCoalitions = new List<PoliticalCoalition>();
             AnalysisTimestamp = DateTime.Now;
         }
     }
@@ -559,9 +559,9 @@ public static class CoalitionFormationSystem
     /// <summary>
     /// Analyze a specific coalition combination
     /// </summary>
-    private static Coalition AnalyzeCoalition(List<PoliticalParty> parties, List<ElectionResult> electionResults)
+    private static PoliticalCoalition AnalyzeCoalition(List<PoliticalParty> parties, List<ElectionResult> electionResults)
     {
-        var coalition = new Coalition
+        var coalition = new PoliticalCoalition
         {
             Parties = parties,
             PartyNames = parties.Select(p => p.Abbreviation).ToList()
@@ -727,7 +727,7 @@ public static class CoalitionFormationSystem
         return combinations;
     }
 
-    private static Coalition CreateSpecificCoalition(string[] partyAbbreviations, 
+    private static PoliticalCoalition CreateSpecificCoalition(string[] partyAbbreviations, 
         List<PoliticalParty> allParties, List<ElectionResult> electionResults)
     {
         var coalitionParties = new List<PoliticalParty>();
@@ -741,7 +741,7 @@ public static class CoalitionFormationSystem
             }
         }
 
-        return coalitionParties.Count > 0 ? AnalyzeCoalition(coalitionParties, electionResults) : new Coalition();
+        return coalitionParties.Count > 0 ? AnalyzeCoalition(coalitionParties, electionResults) : new PoliticalCoalition();
     }
 
     private static float CalculateStabilityFactor(List<PoliticalParty> parties)

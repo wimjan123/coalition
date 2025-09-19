@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using Coalition.Runtime.Core;
 using Coalition.Runtime.Data;
 
@@ -50,7 +51,7 @@ namespace Coalition.Runtime.UI
         // System integration
         private DemoGameManager demoGameManager;
         private ElectionResult currentElectionResult;
-        private Coalition currentCoalition;
+        private PoliticalCoalition currentCoalition;
 
         // Performance monitoring
         private float lastFrameTime;
