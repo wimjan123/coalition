@@ -5,8 +5,7 @@
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "Coalition.Runtime",
-        "Coalition.Demo",
-        "Coalition.Tests.Performance"
+        "Coalition.Demo"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
