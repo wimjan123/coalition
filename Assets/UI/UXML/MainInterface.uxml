@@ -1,0 +1,76 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="RootContainer" style="flex-grow: 1; background-color: rgb(15, 41, 67);">
+        <ui:VisualElement name="HeaderPanel" style="height: 80px; background-color: rgb(8, 26, 44); flex-direction: row; align-items: center; justify-content: space-between; padding-left: 20px; padding-right: 20px;">
+            <ui:Label text="COALITION - Dutch Political Simulator" display-tooltip-when-elided="true" name="GameTitle" style="font-size: 24px; color: rgb(255, 255, 255); -unity-font-style: bold;" />
+            <ui:VisualElement name="GameInfo" style="flex-direction: row; align-items: center;">
+                <ui:Label text="Phase: Formation" display-tooltip-when-elided="true" name="CurrentPhase" style="color: rgb(200, 200, 200); margin-right: 20px;" />
+                <ui:Label text="Time: 00:00" display-tooltip-when-elided="true" name="GameTime" style="color: rgb(200, 200, 200);" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <ui:VisualElement name="MainContent" style="flex-grow: 1; flex-direction: row;">
+            <ui:VisualElement name="LeftPanel" style="width: 300px; background-color: rgb(20, 50, 80); padding: 15px;">
+                <ui:Label text="Political Parties" display-tooltip-when-elided="true" style="font-size: 16px; color: rgb(255, 255, 255); margin-bottom: 10px; -unity-font-style: bold;" />
+                <ui:ScrollView name="PartyList" style="flex-grow: 1;">
+                    <!-- Political parties will be populated dynamically -->
+                </ui:ScrollView>
+            </ui:VisualElement>
+
+            <ui:VisualElement name="CenterPanel" style="flex-grow: 1; background-color: rgb(25, 55, 85); padding: 20px;">
+                <ui:StackView name="MainViews" style="flex-grow: 1;">
+                    <ui:VisualElement name="WelcomeView" style="flex-grow: 1; align-items: center; justify-content: center;">
+                        <ui:Label text="Welcome to COALITION" display-tooltip-when-elided="true" style="font-size: 32px; color: rgb(255, 255, 255); margin-bottom: 20px; -unity-font-style: bold;" />
+                        <ui:Label text="Navigate Dutch coalition formation with authentic political data" display-tooltip-when-elided="true" style="font-size: 16px; color: rgb(200, 200, 200); margin-bottom: 30px; text-align: middle-center;" />
+                        <ui:Button text="Start Formation Process" display-tooltip-when-elided="true" name="StartButton" style="padding: 10px 20px; font-size: 16px;" />
+                    </ui:VisualElement>
+
+                    <ui:VisualElement name="CoalitionFormationView" style="flex-grow: 1; display: none;">
+                        <ui:Label text="Coalition Formation" display-tooltip-when-elided="true" style="font-size: 24px; color: rgb(255, 255, 255); margin-bottom: 20px; -unity-font-style: bold;" />
+                        <ui:VisualElement name="CoalitionArea" style="flex-grow: 1; border-left-width: 2px; border-right-width: 2px; border-top-width: 2px; border-bottom-width: 2px; border-color: rgb(100, 100, 100); padding: 15px; margin-bottom: 20px;">
+                            <ui:Label text="Drop parties here to form coalition" display-tooltip-when-elided="true" name="CoalitionPlaceholder" style="color: rgb(150, 150, 150); text-align: middle-center; margin-top: 50px;" />
+                            <ui:VisualElement name="CoalitionParties" style="flex-direction: row; flex-wrap: wrap; justify-content: flex-start;">
+                                <!-- Coalition parties will be populated dynamically -->
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                        <ui:VisualElement name="CoalitionInfo" style="background-color: rgb(30, 60, 90); padding: 15px; border-radius: 5px;">
+                            <ui:Label text="Coalition Details" display-tooltip-when-elided="true" style="font-size: 16px; color: rgb(255, 255, 255); margin-bottom: 10px; -unity-font-style: bold;" />
+                            <ui:Label text="Total Seats: 0 / 76 needed for majority" display-tooltip-when-elided="true" name="SeatCount" style="color: rgb(200, 200, 200); margin-bottom: 5px;" />
+                            <ui:Label text="Compatibility Score: N/A" display-tooltip-when-elided="true" name="CompatibilityScore" style="color: rgb(200, 200, 200);" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+
+                    <ui:VisualElement name="NegotiationView" style="flex-grow: 1; display: none;">
+                        <ui:Label text="Coalition Negotiations" display-tooltip-when-elided="true" style="font-size: 24px; color: rgb(255, 255, 255); margin-bottom: 20px; -unity-font-style: bold;" />
+                        <ui:ScrollView name="NegotiationHistory" style="flex-grow: 1; background-color: rgb(30, 60, 90); padding: 15px; margin-bottom: 20px;">
+                            <ui:Label text="Negotiation history will appear here..." display-tooltip-when-elided="true" style="color: rgb(150, 150, 150);" />
+                        </ui:ScrollView>
+                        <ui:VisualElement name="NegotiationControls" style="flex-direction: row; justify-content: space-between;">
+                            <ui:Button text="Propose Agreement" display-tooltip-when-elided="true" name="ProposeButton" style="flex-grow: 1; margin-right: 10px;" />
+                            <ui:Button text="Make Concession" display-tooltip-when-elided="true" name="ConcessionButton" style="flex-grow: 1; margin-left: 10px;" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:StackView>
+            </ui:VisualElement>
+
+            <ui:VisualElement name="RightPanel" style="width: 300px; background-color: rgb(20, 50, 80); padding: 15px;">
+                <ui:Label text="Current Issues" display-tooltip-when-elided="true" style="font-size: 16px; color: rgb(255, 255, 255); margin-bottom: 10px; -unity-font-style: bold;" />
+                <ui:ScrollView name="IssuesList" style="flex-grow: 1; margin-bottom: 20px;">
+                    <!-- Political issues will be populated dynamically -->
+                </ui:ScrollView>
+
+                <ui:Label text="Social Media" display-tooltip-when-elided="true" style="font-size: 16px; color: rgb(255, 255, 255); margin-bottom: 10px; -unity-font-style: bold;" />
+                <ui:ScrollView name="SocialMediaFeed" style="flex-grow: 1;">
+                    <!-- Social media updates will be populated dynamically -->
+                </ui:ScrollView>
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <ui:VisualElement name="BottomPanel" style="height: 60px; background-color: rgb(8, 26, 44); flex-direction: row; align-items: center; justify-content: space-between; padding-left: 20px; padding-right: 20px;">
+            <ui:VisualElement name="ActionButtons" style="flex-direction: row;">
+                <ui:Button text="Save Game" display-tooltip-when-elided="true" name="SaveButton" style="margin-right: 10px;" />
+                <ui:Button text="Settings" display-tooltip-when-elided="true" name="SettingsButton" />
+            </ui:VisualElement>
+            <ui:Label text="Ready" display-tooltip-when-elided="true" name="StatusText" style="color: rgb(200, 200, 200);" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

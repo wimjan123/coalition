@@ -1,0 +1,381 @@
+/* COALITION Game UI Styles */
+
+/* Color Palette */
+:root {
+    --primary-dark: rgb(8, 26, 44);
+    --primary-medium: rgb(15, 41, 67);
+    --primary-light: rgb(20, 50, 80);
+    --secondary-dark: rgb(25, 55, 85);
+    --secondary-medium: rgb(30, 60, 90);
+    --accent-blue: rgb(40, 70, 100);
+    --text-white: rgb(255, 255, 255);
+    --text-light: rgb(200, 200, 200);
+    --text-medium: rgb(180, 180, 180);
+    --text-disabled: rgb(150, 150, 150);
+    --success-green: rgb(50, 120, 50);
+    --warning-orange: rgb(200, 120, 50);
+    --error-red: rgb(200, 50, 50);
+}
+
+/* Global Typography */
+.title-large {
+    font-size: 32px;
+    color: var(--text-white);
+    -unity-font-style: bold;
+}
+
+.title-medium {
+    font-size: 24px;
+    color: var(--text-white);
+    -unity-font-style: bold;
+}
+
+.title-small {
+    font-size: 16px;
+    color: var(--text-white);
+    -unity-font-style: bold;
+}
+
+.body-text {
+    font-size: 14px;
+    color: var(--text-light);
+}
+
+.caption-text {
+    font-size: 12px;
+    color: var(--text-medium);
+}
+
+.small-text {
+    font-size: 10px;
+    color: var(--text-medium);
+}
+
+/* Layout Components */
+.panel {
+    background-color: var(--primary-light);
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.card {
+    background-color: var(--accent-blue);
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.header-panel {
+    background-color: var(--primary-dark);
+    height: 80px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.footer-panel {
+    background-color: var(--primary-dark);
+    height: 60px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* Button Styles */
+.button-primary {
+    background-color: var(--accent-blue);
+    color: var(--text-white);
+    border-radius: 5px;
+    padding: 10px 20px;
+    border-width: 0;
+    font-size: 14px;
+}
+
+.button-primary:hover {
+    background-color: var(--secondary-medium);
+}
+
+.button-primary:active {
+    background-color: var(--secondary-dark);
+}
+
+.button-secondary {
+    background-color: transparent;
+    color: var(--text-light);
+    border-radius: 5px;
+    padding: 8px 16px;
+    border-width: 1px;
+    border-color: var(--text-light);
+    font-size: 12px;
+}
+
+.button-secondary:hover {
+    background-color: var(--accent-blue);
+    color: var(--text-white);
+}
+
+.button-success {
+    background-color: var(--success-green);
+    color: var(--text-white);
+    border-radius: 5px;
+    padding: 8px 16px;
+    border-width: 0;
+    font-size: 12px;
+}
+
+.button-success:hover {
+    background-color: rgb(60, 140, 60);
+}
+
+.button-small {
+    font-size: 10px;
+    padding: 3px 8px;
+}
+
+/* Party-specific styles */
+.party-card {
+    background-color: var(--accent-blue);
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border-left-width: 3px;
+}
+
+.party-header {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.party-color-indicator {
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    margin-right: 10px;
+}
+
+.party-name {
+    font-size: 14px;
+    color: var(--text-white);
+    -unity-font-style: bold;
+    flex-grow: 1;
+}
+
+.seat-count {
+    color: var(--text-light);
+    font-size: 12px;
+}
+
+.ideology-text {
+    color: var(--text-medium);
+    font-size: 11px;
+    margin-bottom: 5px;
+}
+
+/* Coalition Formation */
+.coalition-area {
+    flex-grow: 1;
+    border-width: 2px;
+    border-color: rgb(100, 100, 100);
+    border-style: dashed;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.coalition-placeholder {
+    color: var(--text-disabled);
+    text-align: middle-center;
+    margin-top: 50px;
+    font-style: italic;
+}
+
+.coalition-info {
+    background-color: var(--secondary-medium);
+    padding: 15px;
+    border-radius: 5px;
+}
+
+/* Compatibility indicators */
+.compatibility-high {
+    color: rgb(100, 200, 100);
+}
+
+.compatibility-medium {
+    color: rgb(200, 200, 100);
+}
+
+.compatibility-low {
+    color: rgb(200, 100, 100);
+}
+
+.compatibility-bar {
+    height: 4px;
+    background-color: rgb(60, 60, 60);
+    border-radius: 2px;
+    margin-top: 2px;
+}
+
+.compatibility-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition-duration: 0.3s;
+}
+
+/* Issues and Social Media */
+.issue-item {
+    background-color: var(--secondary-medium);
+    padding: 8px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    border-left-width: 2px;
+}
+
+.issue-urgent {
+    border-left-color: var(--error-red);
+}
+
+.issue-important {
+    border-left-color: var(--warning-orange);
+}
+
+.issue-normal {
+    border-left-color: var(--accent-blue);
+}
+
+.social-media-post {
+    background-color: var(--secondary-medium);
+    padding: 8px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    border-left-width: 2px;
+    border-left-color: var(--accent-blue);
+}
+
+.social-media-author {
+    color: var(--text-white);
+    font-size: 11px;
+    -unity-font-style: bold;
+    margin-bottom: 3px;
+}
+
+.social-media-content {
+    color: var(--text-light);
+    font-size: 10px;
+}
+
+.social-media-time {
+    color: var(--text-disabled);
+    font-size: 9px;
+    margin-top: 3px;
+}
+
+/* Animations and Transitions */
+.fade-in {
+    transition-duration: 0.3s;
+    transition-property: opacity;
+}
+
+.scale-hover:hover {
+    transition-duration: 0.2s;
+    transition-property: scale;
+    scale: 1.05;
+}
+
+/* Scrollview styling */
+.scroll-view {
+    flex-grow: 1;
+}
+
+.scroll-view > .unity-scroller--vertical {
+    width: 8px;
+}
+
+.scroll-view > .unity-scroller--vertical > .unity-slider {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.scroll-view > .unity-scroller--vertical > .unity-slider > .unity-tracker {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+}
+
+/* Game phase indicators */
+.phase-formation {
+    color: rgb(100, 150, 255);
+}
+
+.phase-negotiation {
+    color: rgb(255, 200, 100);
+}
+
+.phase-agreement {
+    color: rgb(100, 255, 150);
+}
+
+.phase-crisis {
+    color: rgb(255, 100, 100);
+}
+
+/* Status indicators */
+.status-ready {
+    color: var(--success-green);
+}
+
+.status-working {
+    color: var(--warning-orange);
+}
+
+.status-error {
+    color: var(--error-red);
+}
+
+/* Loading and progress */
+.progress-bar {
+    height: 8px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--accent-blue);
+    transition-duration: 0.3s;
+    transition-property: width;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .title-large {
+        font-size: 28px;
+    }
+
+    .title-medium {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 800px) {
+    .header-panel {
+        height: 60px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .footer-panel {
+        height: 50px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .panel {
+        padding: 10px;
+    }
+}

@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1b2c3d4e5f6789012345678901234567890abcd, type: 3}
+  m_Name: VVD
+  m_EditorClassIdentifier:
+  partyName: VVD
+  fullName: Volkspartij voor Vrijheid en Democratie
+  leader: Dilan Yesilgöz-Zegerius
+  ideology: Liberal
+  description: The People's Party for Freedom and Democracy is a liberal party that emphasizes individual freedom, free markets, and minimal government intervention.
+  seatCount: 34
+  votesReceived: 2261326
+  votePercentage: 23.6
+  partyColor:
+    r: 0.0
+    g: 0.4
+    b: 0.8
+    a: 1.0
+  economicPosition: 7.2
+  socialPosition: 6.8
+  europeanPosition: 7.5
+  immigrationPosition: 4.2
+  environmentPosition: 5.8
+  keyPolicies:
+  - Lower taxes for businesses and individuals
+  - Reduce government spending and debt
+  - Strong support for EU integration
+  - Strict immigration controls
+  - Market-based climate solutions
+  coalitionPreferences:
+  - CDA
+  - D66
+  - ChristenUnie
+  coalitionRejections:
+  - PVV
+  - FVD
+  - DENK
+  compatibilityMatrix:
+  - partyName: PVV
+    score: 2.1
+  - partyName: GL-PvdA
+    score: 3.8
+  - partyName: PVV
+    score: 2.1
+  - partyName: CDA
+    score: 8.5
+  - partyName: D66
+    score: 7.2
+  - partyName: SP
+    score: 2.9
+  - partyName: ChristenUnie
+    score: 6.8
+  - partyName: Volt
+    score: 6.1
+  - partyName: JA21
+    score: 5.4
+  - partyName: SGP
+    score: 4.7
+  - partyName: DENK
+    score: 2.3
+  - partyName: FVD
+    score: 1.8
+  - partyName: BBB
+    score: 5.9
+  historicalCoalitions:
+  - Rutte I (2010-2012)
+  - Rutte II (2012-2017)
+  - Rutte III (2017-2021)
+  - Rutte IV (2022-2023)
+  socialMediaProfile:
+    twitterHandle: "@VVD"
+    followers: 125000
+    averageLikes: 450
+    averageRetweets: 180
+    sentimentScore: 0.15
+  negotiationStyle: Pragmatic
+  redLines:
+  - No wealth tax
+  - EU membership non-negotiable
+  - Market economy principles
+  flexibility: 6.5
